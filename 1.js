@@ -15,8 +15,4 @@ function calcDepthIncreases(depthsArr) {
   return totalDepthIncreases
 }
 
-function linesToArray(inputString) {
-  return inputString.split(/\n/).map((t) => +t)
-}
-
-export { calcDepthIncreases, linesToArray }
+export { calcDepthIncreases }
