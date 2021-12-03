@@ -1,3 +1,5 @@
+// https://adventofcode.com/2021/day/1
+
 function calcDepthIncreasesSliding(depthsArr) {
   const totalDepthIncreases = depthsArr.reduce(
     (increaseCount, currentDepth, index, depths) => {

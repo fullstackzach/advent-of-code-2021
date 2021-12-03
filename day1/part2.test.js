@@ -1,8 +1,8 @@
-import { calcDepthIncreasesSliding } from './2.js'
-import { linesToNumArray } from './utils.js'
+import { calcDepthIncreasesSliding } from './part2.js'
+import { linesToNumArray } from '../utils.js'
 import { problemData } from './data-set'
 
-describe('Day 2 solution', () => {
+describe('Day 1 solution - part 2', () => {
   test('for the problem example 1', () => {
     const depths = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
     expect(calcDepthIncreasesSliding(depths)).toBe(5)
