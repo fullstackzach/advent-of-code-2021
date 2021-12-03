@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "These are my Advent of Code 2021 solutions",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "u lint",
     "test": "u test",

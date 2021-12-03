@@ -1,7 +1,7 @@
 // https://adventofcode.com/2021/day/1
 
-function calcDepthIncreases(depths) {
-  const totalDepthIncreases = depths.reduce(
+function calcDepthIncreases(depthsArr) {
+  const totalDepthIncreases = depthsArr.reduce(
     (increaseCount, currentDepth, index, depths) => {
       if (currentDepth > depths[index - 1]) {
         // there was an depth increase
@@ -15,4 +15,8 @@ function calcDepthIncreases(depths) {
   return totalDepthIncreases
 }
 
-export { calcDepthIncreases }
+function linesToArray(inputString) {
+  return inputString.split(/\n/).map((t) => +t)
+}
+
+export { calcDepthIncreases, linesToArray }
