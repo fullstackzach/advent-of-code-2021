@@ -1,4 +1,4 @@
-import { parse, calcGammaBits, flipBits } from './day3.js'
+import { parse, calcGammaBits, flipBits, binaryStringToBase10 } from './day3.js'
 
 describe('Day 3 - parse data', () => {
   test('example data should parse correctly', () => {
@@ -54,5 +54,15 @@ describe('Day 3 - calcGammaBits', () => {
 describe('Day 3 - flipBits', () => {
   test('flips 10010 to 01101', () => {
     expect(flipBits('10010')).toBe('01101')
+  })
+})
+
+describe('Day 3 - binaryStringToBase10', () => {
+  test('10110 returns 22', () => {
+    expect(binaryStringToBase10('10110')).toEqual(22)
+  })
+
+  test('01001 returns 9', () => {
+    expect(binaryStringToBase10('01001')).toEqual(9)
   })
 })
