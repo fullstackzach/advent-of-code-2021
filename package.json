@@ -4,7 +4,9 @@
   "description": "These are my Advent of Code 2021 solutions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "u lint",
+    "test": "u test",
+    "test-ci": "u test-ci"
   },
   "repository": {
     "type": "git",
@@ -16,7 +18,10 @@
     "url": "https://github.com/fullstackzach/advent-of-code-2021/issues"
   },
   "homepage": "https://github.com/fullstackzach/advent-of-code-2021#readme",
-  "dependencies": {
-    "jest": "^27.4.3"
+  "devDependencies": {
+    "@jr.codes/u": "^1.0.1"
+  },
+  "eslintConfig": {
+    "extends": "@jr.codes"
   }
 }
