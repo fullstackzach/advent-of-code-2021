@@ -4,7 +4,7 @@ function parseIntoArrays(commandsText) {
   const commandsArr = commandsText.split(/\n/) // split each line into its own array
   const commands = commandsArr.map((command) => {
     const values = command.split(' ') // split the "direction" and the "distance"
-    return { direction: values[0], distance: +values[1] } // return it this way so we can coerce the distance into a number, store values as array
+    return { direction: values[0], distance: +values[1] } // return it this way so we can coerce the distance into a number, store values as an object
   })
   return commands
 }
@@ -29,8 +29,4 @@ function moveTheShip(parsedCommands) {
   return finalLocation
 }
 
-function calcMultiply({ horizontal, depth }) {
-  return horizontal * depth
-}
-
-export { parseIntoArrays, moveTheShip, calcMultiply }
+export { parseIntoArrays, moveTheShip }
