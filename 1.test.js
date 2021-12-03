@@ -1,6 +1,6 @@
 import { calcDepthIncreases } from './1.js'
-import { problemData } from './1data.js'
-import { linesToNumArray } from './utils'
+import { problemData } from './data-set.js'
+import { linesToNumArray } from './utils.js'
 
 describe('Day 1 solution', () => {
   test('for the problem example', () => {
@@ -23,7 +23,7 @@ describe('Day 1 solution', () => {
     expect(calcDepthIncreases(depths)).toBe(6)
   })
 
-  test('the large problem solution set', () => {
+  test('the large problem data set', () => {
     const depths = linesToNumArray(problemData)
     expect(calcDepthIncreases(depths)).toBe(1559)
   })
