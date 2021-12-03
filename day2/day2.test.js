@@ -1,4 +1,4 @@
-import { parseIntoArrays, moveTheShip, calcMultiply } from './day2.js'
+import { parseIntoArrays, moveTheShip } from './day2.js'
 import { commandsStr } from './data.js'
 
 describe('Day 2 - parseIntoArrays', () => {
@@ -41,9 +41,9 @@ forward 2`)
     })
   })
 
-  test('solution multiplied', () => {
+  test('final answer', () => {
     const commands = parseIntoArrays(commandsStr)
     const position = moveTheShip(commands)
-    expect(calcMultiply(position)).toBe(1451208)
+    expect(position.horizontal * position.depth).toBe(1451208)
   })
 })
