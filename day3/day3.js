@@ -76,6 +76,52 @@ function mostCommon(arr, bitIndex) {
   return -1
 }
 
+function reduceTargetBit(data, index, targetBit) {
+  return data.reduce((matchingVals, current) => {
+    if (Number.parseInt(current[index]) === targetBit) {
+      matchingVals.push(current)
+    }
+    return matchingVals
+  }, [])
+}
+
+function flipAbit(bit) {
+  return bit === 0 ? 1 : 0
+}
+
+function oxygenGeneratorRating(data, index = 0) {
+  const result = mostCommon(data, index)
+  const commonBit = result === -1 ? 1 : result
+
+  if (data.length === 1) {
+    return binaryStringToBase10(data[0])
+  }
+
+  const arr = reduceTargetBit(data, index, commonBit)
+
+  return oxygenGeneratorRating(arr, ++index)
+}
+
+function co2scrubberRating(data, index = 0) {
+  const result = mostCommon(data, index)
+  const leastCommonBit = result === -1 ? 0 : flipAbit(result)
+
+  if (data.length === 1) {
+    return binaryStringToBase10(data[0])
+  }
+
+  const arr = reduceTargetBit(data, index, leastCommonBit)
+
+  return co2scrubberRating(arr, ++index)
+}
+
+function part2solution() {
+  const data = parse(diagnostics)
+  const oxyRating = oxygenGeneratorRating(data)
+  const co2Rating = co2scrubberRating(data)
+  return oxyRating * co2Rating
+}
+
 export {
   parse,
   calcGammaBits,
@@ -83,4 +129,7 @@ export {
   binaryStringToBase10,
   part1solution,
   mostCommon,
+  oxygenGeneratorRating,
+  co2scrubberRating,
+  part2solution,
 }

@@ -5,6 +5,9 @@ import {
   binaryStringToBase10,
   part1solution,
   mostCommon,
+  oxygenGeneratorRating,
+  co2scrubberRating,
+  part2solution,
 } from './day3.js'
 
 describe('parse data', () => {
@@ -127,5 +130,47 @@ describe('Part 2 - mostCommon', () => {
 00010
 01010`
     expect(mostCommon(parse(exampleData), 0)).toEqual(0)
+  })
+})
+
+describe('Part 2 - oxygenGeneratorRating', () => {
+  test('with example data', () => {
+    const exampleData = `00100
+11110
+10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010`
+    expect(oxygenGeneratorRating(parse(exampleData))).toEqual(23)
+  })
+})
+
+describe('Part 2 - co2scrubberRating', () => {
+  test('with example data', () => {
+    const exampleData = `00100
+11110
+10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010`
+    expect(co2scrubberRating(parse(exampleData))).toEqual(10)
+  })
+})
+
+describe('Part 2 - final solution', () => {
+  test('with solution data', () => {
+    expect(part2solution()).toEqual(6677951)
   })
 })
