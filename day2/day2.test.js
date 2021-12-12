@@ -1,4 +1,4 @@
-import { parseIntoArrays, moveTheShip } from './day2.js'
+import { parseIntoArrays, moveTheShipPart1, moveTheShipPart2 } from './day2.js'
 import { commandsStr } from './data.js'
 
 describe('Day 2 - parseIntoArrays', () => {
@@ -21,7 +21,7 @@ up 8`
   })
 })
 
-describe('Day 2 - move the ship', () => {
+describe('Day 2 - Part 1 - move the ship', () => {
   test('problem example', () => {
     const commands = parseIntoArrays(`forward 5
 down 5
@@ -30,12 +30,15 @@ up 3
 down 8
 forward 2`)
 
-    expect(moveTheShip(commands)).toStrictEqual({ horizontal: 15, depth: 10 })
+    expect(moveTheShipPart1(commands)).toStrictEqual({
+      horizontal: 15,
+      depth: 10,
+    })
   })
 
   test('data set example', () => {
     const commands = parseIntoArrays(commandsStr)
-    expect(moveTheShip(commands)).toStrictEqual({
+    expect(moveTheShipPart1(commands)).toStrictEqual({
       horizontal: 2024,
       depth: 717,
     })
@@ -43,7 +46,27 @@ forward 2`)
 
   test('final answer', () => {
     const commands = parseIntoArrays(commandsStr)
-    const position = moveTheShip(commands)
+    const position = moveTheShipPart1(commands)
     expect(position.horizontal * position.depth).toBe(1451208)
+  })
+})
+
+describe('Day 2 - Part 2 - move the ship', () => {
+  test('problem example', () => {
+    const commands = parseIntoArrays(`forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2`)
+
+    const position = moveTheShipPart2(commands)
+    expect(position.horizontal * position.depth).toEqual(900)
+  })
+
+  test('final answer', () => {
+    const commands = parseIntoArrays(commandsStr)
+    const position = moveTheShipPart2(commands)
+    expect(position.horizontal * position.depth).toBe(1620141160)
   })
 })
