@@ -6,7 +6,10 @@ function parse(diagnosticData) {
 
 // Creates an array with 0's matching the length of the given data. eg [0,0,0,0,0]. so we can handle any kind of data set
 function generateCountingArray(data) {
-  return [...'0'.repeat(data.length)].map((value) => Number.parseInt(value))
+  const array = []
+  array.length = data.length
+  array.fill(0)
+  return array
 }
 
 function calcGammaBits(data) {
