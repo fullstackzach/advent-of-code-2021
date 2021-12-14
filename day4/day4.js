@@ -29,6 +29,7 @@ class BingoBoard {
       const rowArr = row.trim().split(/\s+/)
       return rowArr.map((number) => new Spot(number))
     })
+    this.bingoed = false
   }
 
   checkAndMark(calledNumber) {
@@ -38,12 +39,16 @@ class BingoBoard {
         if (spot.number === calledNumber) spot.mark()
       }
     }
+    this.checkBingo()
   }
 
-  isBingo() {
+  checkBingo() {
     // any horizontal
     for (const row of this.rows) {
-      if (row.every((spot) => spot.marked)) return true
+      if (row.every((spot) => spot.marked)) {
+        this.bingoed = true
+        return true
+      }
     }
     // any vertical
     for (let i = 0; i < this.rows[0].length; i++) {
@@ -53,7 +58,11 @@ class BingoBoard {
           markCount++
         }
       }
-      if (markCount === this.rows.length) return true
+
+      if (markCount === this.rows.length) {
+        this.bingoed = true
+      }
+      return true
     }
     // not winning board
     return false
@@ -72,37 +81,42 @@ class BingoBoard {
   }
 }
 
-const data = getRawData()
-const lines = data.split('\n')
+function initialize() {
+  const data = getRawData()
+  const lines = data.split('\n')
 
-// initialize
-let index = 0
-let callouts
-let rawBoard = []
-let boardCollection = []
-for (const line of lines) {
-  if (index === 0) {
-    callouts = line.split(',').map((callout) => Number.parseInt(callout))
-  } else if (line === '') {
-    rawBoard = []
-  } else {
-    rawBoard.push(line)
+  // initialize
+  let index = 0
+  let callouts
+  let rawBoard = []
+  let boardCollection = []
+  for (const line of lines) {
+    if (index === 0) {
+      callouts = line.split(',').map((callout) => Number.parseInt(callout))
+    } else if (line === '') {
+      rawBoard = []
+    } else {
+      rawBoard.push(line)
+    }
+
+    if (rawBoard.length === 5) {
+      const bingoBoard = new BingoBoard(rawBoard)
+      boardCollection.push(bingoBoard)
+    }
+
+    index++
   }
-
-  if (rawBoard.length === 5) {
-    const bingoBoard = new BingoBoard(rawBoard)
-    boardCollection.push(bingoBoard)
-  }
-
-  index++
+  return { callouts, boardCollection }
 }
 
-function runTheGame() {
+// Part 1
+function fastestWinningScore() {
+  let { callouts, boardCollection } = initialize()
   let winningScore
   callouts.every((callout, index) => {
     boardCollection.every((board, boardIndex) => {
       board.checkAndMark(callout)
-      if (index >= 5 && board.isBingo()) {
+      if (index >= 5 && board.bingoed) {
         const unmarkedSum = board.calcSumOfUnmarked()
         winningScore = callout * unmarkedSum
         console.log(
@@ -120,4 +134,42 @@ function runTheGame() {
   return winningScore
 }
 
-runTheGame()
+fastestWinningScore()
+
+// Part 2
+function guaranteedLoser() {
+  let { callouts, boardCollection } = initialize()
+  let losingScore
+
+  callouts.every((callout, index) => {
+    let boardsToRemove = []
+    boardCollection.every((board, boardIndex) => {
+      board.checkAndMark(callout)
+      if (index >= 5 && board.bingoed) {
+        if (boardCollection.length === 1) {
+          const unmarkedSum = board.calcSumOfUnmarked()
+          losingScore = callout * unmarkedSum
+          console.log(
+            `Bingo! found the losingest most board in the game in ${
+              index + 1
+            } moves on the called number ${callout}! The unmarked sum was ${unmarkedSum}, for a total score of ${losingScore}`
+          )
+          return false
+        }
+        boardsToRemove.push(boardIndex)
+      }
+      return true
+    })
+
+    // strategy is to remove boards from the array until only one is remaining, and once it bingos, we can calculate our score
+    for (let i = boardsToRemove.length - 1; i >= 0; i--) {
+      // we have to iterate backwards because splicing earlier boards will shift the position of boards further in the array
+      boardCollection.splice(boardsToRemove[i], 1)
+    }
+
+    if (losingScore) return false
+    return true
+  })
+}
+
+guaranteedLoser()
