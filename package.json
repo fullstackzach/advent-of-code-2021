@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/fullstackzach/advent-of-code-2021#readme",
   "devDependencies": {
-    "@jr.codes/u": "1.0.1"
+    "@jr.codes/u": "1.0.4"
   },
   "eslintConfig": {
     "extends": "@jr.codes"
